@@ -12,8 +12,8 @@ First, prepare a proper WordPress environment:
 * You will also need *WP REST API*. It is a plugin (with plans to incorporate into the WordPress core) that creates REST API to be used by the theme. Plugin is currently **NOT** in plugins repository, you have to upload the files manually. Install and activate the [WP REST API](https://github.com/WP-API/WP-API/tree/master) plugin (make sure that you are using the `master` branch – the default is currently develop),
 * Set your permlink structure to `/%year%/%monthnum%/%day%/%postname%/`.
 
-### 2. Theme building (for _team_ building go to your local meetup)
-Unlike other themes, this one uses a build process. JavaScript is an interpreted language, but we need to take certain steps (like transpiling React JSX syntax or SASS CSS syntax) to take the files from development phase to production. You will need the following tools:
+### 2. Theme building
+Unlike other themes, this one uses a build process, you need:
 
 * *node.js* and *npm* - node is an command line JavaScript interpreter that is used for build process. npm stands for node package manager. You can install both from [nodejs.org](https://nodejs.org/download/),
 * *[gulp](http://gulpjs.com/)* is a build system running on node. Once you install node and npm, type `npm install -g gulp` to install gulp in your system (`-g` flag installs package globally so you will now have gulp command in your command line).
