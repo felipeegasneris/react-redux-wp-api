@@ -1,0 +1,12 @@
+# Files
+style.css
+main.js
+*.css.map
+min/main-min.js
+
+
+# Folders
+node_modules
+.sass-cache
+
+*.codekit
