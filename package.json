@@ -1,21 +1,18 @@
 {
-  "name": "picard-r",
+  "name": "React + Redux + WP-API v2 Wordpress Theme"
   "version": "0.0.0",
-  "description": "The next generation WordPress theme boilerplate",
+  "description": "Experimental boilerplate",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/Automattic/Picard.git"
+    "url": "git://github.com/felipeegasneris/react-redux-wp-api.git"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Automattic/Picard/issues"
-  },
-  "homepage": "https://github.com/Automattic/Picard",
+  "homepage": "https://github.com/felipeegasneris",
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
