@@ -6,14 +6,14 @@ import React from 'react'
 /**
  * Renders content
  */
-var EntryContent = React.createClass({
+export default class EntryContent extends React.Component {
 
-	render: function() {
+	render(){
 		return (
 			<div className="entry-content" dangerouslySetInnerHTML={{__html: this.props.content}} />
-		);
+		)
 	}
 
-});
+}
 
-module.exports = EntryContent;
+

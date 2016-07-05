@@ -7,86 +7,77 @@ import page from 'page'
 /**
  * Internal dependencies
  */
-var Comments = require( '../comments/comments.jsx' ),
-	EntryContent = require( './entry-content/entry-content.jsx' );
-
+import Comments from  '../comments/comments.jsx'
+import EntryContent from './entry-content/entry-content.jsx'
+import EntryHeader from './hentry-header/entry-header.jsx'
+import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 /**
  * Animation setup
  */
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+//var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 /**
  * Renders post
  */
-Hentry = React.createClass({
-	handleAdd: function( e ) {
+export default class Hentry extends React.Component {
+	handleAdd(e) {
 		e.preventDefault();
-		url = this.props.link;
+		let url = this.props.link;
 		url = url.replace(/^.*\/\/[^\/]+/, '');
-		page( url );
-	},
-	render: function() {
+		page(url)
+	}
+
+	render(){
 
 
-		var d = new Date( this.props.date ),
-			formattedDate = d.toDateString();
+    let  d = new Date( this.props.date ),
+    formattedDate = d.toDateString();
 
 		// Decide whether or not to render comments and entry-content
 		var comments,
 			content;
 
-      console.log(this.props);
-			comments = <Comments postID={ this.props.id } />;
-			entryContent = <EntryContent content={ this.props.content.rendered } />;
+    console.log(this.props);
+    comments = <Comments postID={ this.props.id } />;
+    let entryContent = <EntryContent content={ this.props.content.rendered } />;
 
-
+    var entryHeader;
 		// Featured image support
-		var entryHeader,
-			postClass;
+		let postClass;
 		if ( this.props.featured_image ) {
-			var thumbnailImage = {
+			let thumbnailImage = {
 				backgroundImage: 'url(' + this.props.featured_image.source + ')'
 			};
-			entryHeader = <div className="entry-thumbnail" style={thumbnailImage}>
-				<header className="entry-header">
-					<h1 className="entry-title">
-						<a onClick={this.handleAdd} href={this.props.link} rel="bookmark">
-							{this.props.title}
-						</a>
-					</h1>
-					<div className="entry-meta">
-						{formattedDate}
-					</div>
-				</header>
-			</div>;
+			entryHeader = <EntryHeader thumbnailImage={thumbnailImage}
+        handleAdd = {this.handleAdd  }
+        link = {this.props.link}
+        title = {this.props.title}
+        formattedDate = {formattedDate} />;
+
+
 			postClass = this.props.post_class + " has-post-thumbnail";
 		} else {
-			entryHeader = <header className="entry-header">
-				<h1 className="entry-title">
-					<a onClick={this.handleAdd} href={this.props.link} rel="bookmark">
-						{this.props.title}
-					</a>
-				</h1>
-				<div className="entry-meta">
-					{formattedDate}
-				</div>
-			</header>;
+      var none = {};
+      entryHeader = <EntryHeader thumbnailImage={none}
+        handleAdd = {this.handleAdd  }
+        link = {this.props.link}
+        title = {this.props.title}
+        formattedDate = {formattedDate} />;
+
 			postClass = this.props.post_class;
 		}
 
 		return (
 			<div className="hentry-wrapper">
 				<article className={ postClass }>
-					{ entryHeader }
 
-					<ReactCSSTransitionGroup transitionName="picard-content">
-						{ entryContent }
-					</ReactCSSTransitionGroup>
+          { entryHeader }
+
+          { entryContent }
+
 				</article>
 				{ comments }
 			</div>
 		);
 	}
-});
-
-module.exports = Hentry;
+}

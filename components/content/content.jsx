@@ -15,10 +15,10 @@ import entry_thumbnail from './entry-thumbnail.js'
  */
 export default class Content extends  React.Component {
 
-  constructor(props) {
+  /* constructor(props) {
     super()
+  }*/
 
-  }
 	componentDidMount() {
 
     console.log('didmount!!!');
@@ -43,11 +43,8 @@ export default class Content extends  React.Component {
 
 	render() {
 
-    console.log('upsss!');
     console.log('render!!!');
     var singlePostID = 0;
-
-
 
     console.log(this.props.data);
 		// Check if we're just viewing one post, if so, pass the ID down

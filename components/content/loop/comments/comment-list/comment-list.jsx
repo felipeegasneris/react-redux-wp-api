@@ -1,33 +1,30 @@
 /**
  * External dependencies
  */
-var React = require( 'react/addons' );
+import React from 'react'
 
 /**
  * Internal dependencies
  */
-var Comment = require( './comment/comment.jsx' );
+import Comment from './comment/comment.jsx'
 
 /**
  * Renders list of comments
  */
-var CommentList = React.createClass({
+export default class CommentList extends React.Component {
 
-	render: function() {
+  render() {
 
     console.log(this.props.data);
-		var commentNodes = this.props.data.map( function ( comment ) {
-			return (
-				<Comment key={comment.id} comment={comment} />
-			);
-		});
-		return (
-			<ol className="comment-list">
+    var commentNodes = this.props.data.map( (comment)=> {
+      return (
+        <Comment key={comment.id} comment={comment} />
+      )
+    });
+    return (
+      <ol className="comment-list">
 				{commentNodes}
-			</ol>
-		);
-	}
-
-});
-
-module.exports = CommentList;
+      </ol>
+    )
+  }
+}

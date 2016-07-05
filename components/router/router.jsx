@@ -1,22 +1,22 @@
 /**
  * External dependencies
  */
-var React = require( 'react' ),
-	page = require( 'page' ),
-	request = require( 'superagent' );
+import React from 'react'
+import page from 'page'
+import request from 'superagent'
 
 /**
  * Internal dependencies
  */
-var Content = require( '../content/content.jsx' );
+import Content from  '../content/content.jsx'
 
-var Router = React.createClass({
+export default  class Router extends React.Component {
 
-	componentDidMount: function() {
+	componentDidMount() {
 
 		var self = this;
 
-		page( '/', function ( ctx ) {
+		page( '/', ( ctx ) => {
 			var data,
 				slug = ctx.params.slug,
 				url = "/wp-json/wp/v2/posts";
@@ -28,7 +28,7 @@ var Router = React.createClass({
 				});
 		});
 
-		page( '/:year/:month/:day/:slug', function ( ctx ) {
+		page( '/:year/:month/:day/:slug', ( ctx ) => {
 			var data,
 				slug = ctx.params.slug,
 				url = "/wp-json/wp/v2/posts/?filter[name]=" + slug;
@@ -40,7 +40,7 @@ var Router = React.createClass({
 				});
 		});
 
-		page( '*', function ( ctx ) {
+		page( '*', ( ctx ) => {
 			if ( ctx.state.pageData ) {
 				self.setState({ component: <Content data={ ctx.state.pageData } bodyClass="page" /> });
 			} else {
@@ -63,6 +63,8 @@ var Router = React.createClass({
 				request
 					.get( url )
 					.end( function( err, res ) {
+
+            console.log(res);
 						data = JSON.parse( res.text );
 						ctx.state.pageData = data;
 						ctx.save();
@@ -73,16 +75,16 @@ var Router = React.createClass({
 
 		page.start();
 
-	},
-
-	getInitialState: function() {
-		return { component: <div /> };
-	},
-
-	render: function() {
-		return this.state.component;
 	}
 
-});
+	constructor() {
+    super();
+		this.state =  { component: <div /> };
+	}
 
-module.exports = Router;
+	render() {
+		return this.state.component;
+
+	}
+
+}

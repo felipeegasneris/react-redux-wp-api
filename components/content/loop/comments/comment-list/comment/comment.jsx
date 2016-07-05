@@ -1,14 +1,15 @@
 /**
  * External dependencies
  */
-var React = require( 'react/addons' );
+import React from 'react'
 
 /**
  * Renders comment
  */
-var Comment = React.createClass({
 
-	render: function() {
+export default class Comment extends React.Component{
+
+	render() {
 		var comment = this.props.comment,
 			author = this.props.comment.author,
 			d = new Date( this.props.comment.date ),
@@ -38,9 +39,9 @@ var Comment = React.createClass({
 					</div>
 				</article>
 			</li>
-		);
+		)
 	}
 
-});
+}
 
-module.exports = Comment;
+

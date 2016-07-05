@@ -10,17 +10,16 @@ import page from 'page'
  *
  *
  */
-var Hentry = require( './hentry/hentry.jsx' ),
-	PostNavigation = require( './navigation/post-navigation.jsx');
-
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+import Hentry from './hentry/hentry.jsx'
+import PostNavigation from './navigation/post-navigation.jsx'
+import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup'
 
 /**
  * Renders list of posts
  */
-Loop = React.createClass({
+export default class Loop extends React.Component {
 
-	render: function() {
+	render() {
 		var context = this.props.context,
 			showExtra = false,
 			next,
@@ -29,13 +28,15 @@ Loop = React.createClass({
 			showExtra = true;
 		}
 
-		var postNodes = this.props.data.map( function ( post ) {
+		var postNodes = this.props.data.map( ( post ) => {
+
+      console.log(post);
 			return (
 				<Hentry key={post.id} id={post.id} post_class={post.post_class} link={post.link} title={post.title} date={post.date} content={post.content} featured_image={ post.featured_image } context={ context } showExtra={ showExtra } />
-			);
+			)
 		});
 
-		var navigationNodes = this.props.data.map( function ( post ) {
+		var navigationNodes = this.props.data.map( ( post ) => {
 			if ( context === 'single' ) {
 				return (
 					<PostNavigation previous_post_url={post.previous_post_url} previous_post_title={post.previous_post_title} next_post_url={post.next_post_url} next_post_title={post.next_post_title} />
@@ -45,13 +46,11 @@ Loop = React.createClass({
 
 		return (
 			<div>
-				<ReactCSSTransitionGroup transitionName="picard">
+
 					{ postNodes }
-				</ReactCSSTransitionGroup>
+
 				{ navigationNodes }
 			</div>
-		);
+		)
 	}
-});
-
-module.exports = Loop;
+}

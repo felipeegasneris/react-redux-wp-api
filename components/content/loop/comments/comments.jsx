@@ -1,31 +1,30 @@
 /**
  * External dependencies
  */
-var React = require( 'react/addons' ),
-	request = require( 'superagent' );
+import  React from'react'
+import request from 'superagent'
 
 /**
  * Internal dependencies
  */
-var CommentList = require( './comment-list/comment-list.jsx' ),
-	CommentForm = require( './comment-form/comment-form.jsx' );
+import CommentList from './comment-list/comment-list.jsx'
+import CommentForm from './comment-form/comment-form.jsx'
 
 /**
  * Handles getting of comments from the server and posting of comments to the server
  */
-var Comments = React.createClass({
+export default class Comments extends React.Component {
 
 
-	loadCommentsFromServer: function() {
+	loadCommentsFromServer() {
     console.log(this.props);
 		var repliesLink = '/wp-json/wp/v2/comments/?post='+ this.props.postID;
 
 		var self = this;
 
-		var data,
-			url = repliesLink;
+		var data;
 		request
-			.get( url )
+			.get( repliesLink )
 			.end( function( err, res ) {
 				data = JSON.parse( res.text );
 
@@ -36,9 +35,9 @@ var Comments = React.createClass({
 				self.setState({ data: data });
 
 			});
-	},
+	}
 
-	handleCommentSubmit: function( comment ) {
+	handleCommentSubmit( comment ) {
 
 		var newComment,
 			self = this,
@@ -56,26 +55,32 @@ var Comments = React.createClass({
 				}
 			});
 
-	},
-
+	}
+  /*
 	getInitialState: function() {
 		return {data: []};
-	},
+	},*/
 
-	componentDidMount: function() {
+  constructor(props){
+
+    super(props);
+
+    this.state = {data :[]}
+  }
+
+	componentDidMount() {
 		this.loadCommentsFromServer();
-	},
+	}
 
-	render: function() {
+	render() {
 		return (
 			<div id="comments" className="comments-area">
 				<h2 className="comments-title">Comments</h2>
 				<CommentList data={this.state.data} />
 				<CommentForm onCommentSubmit={this.handleCommentSubmit} />
 			</div>
-		);
+		)
 	}
 
-});
 
-module.exports = Comments;
+}

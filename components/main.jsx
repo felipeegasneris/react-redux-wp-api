@@ -2,7 +2,7 @@
  * External dependencies
  */
 import React from 'react'
-
+import {render} from 'react-dom';
 /**
  * Internal dependencies
  */
@@ -11,6 +11,6 @@ import Router from './router/router.jsx'
 /**
  * Make it so…
  */
-React.render(
+render(
 	<Router />, document.getElementById( 'main' )
 );

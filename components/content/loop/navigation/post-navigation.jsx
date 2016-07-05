@@ -6,9 +6,9 @@ import React from 'react'
 /**
  * Renders links to the next and previous posts.
  */
-PostNavigation = React.createClass({
+export default class PostNavigation extends React.Component {
 
-	render: function() {
+	render() {
 		var previousPostLink;
 		if ( this.props.previous_post_url ) {
 			previousPostLink = <div className="nav-previous">
@@ -36,6 +36,6 @@ PostNavigation = React.createClass({
 			</nav>
 		)
 	}
-});
+}
 
 module.exports = PostNavigation;
